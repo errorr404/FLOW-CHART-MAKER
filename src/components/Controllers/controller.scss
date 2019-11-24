@@ -1,0 +1,9 @@
+.controllers {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  &__inputSection {
+    display: flex;
+    flex-direction: column;
+  }
+}
