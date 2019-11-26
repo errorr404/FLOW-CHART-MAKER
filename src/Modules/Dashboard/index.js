@@ -31,11 +31,11 @@ class Dashboard extends React.Component {
     e.preventDefault();
     this.element = e.target;
     this.setState({ currentSeletedNode: this.element.id });
-    // console.log(e.target);
+    console.log('type-->',e.clientX);
     let evt = e.type === 'touchstart' ? e.changedTouches[0] : e;
-    this.distX = Math.abs(this.element.offsetLeft - evt.clientX);
+    this.distX = Math.abs(this.element.offsetLeft - evt.clientX); // position within the element
     this.distY = Math.abs(this.element.offsetTop - evt.clientY);
-    console.log(this.distX, this.distY);
+    console.log('dist-->',this.distX, this.distY);  // this is the position of mouse inside the element.
     this.element.style.pointerEvents = 'none';
   }
 
@@ -49,7 +49,8 @@ class Dashboard extends React.Component {
     if (this.element) {
       if (this.element.style.pointerEvents === 'none') {
         let evt = e.type === 'touchmove' ? e.changedTouches[0] : e;
-        this.element.style.left = `${evt.clientX - this.distX}px`;
+        console.log('onMove-->',evt.clientX, evt.clientY);
+        this.element.style.left = `${evt.clientX - this.distX}px`;  // it will give the starting position of the element.
         this.element.style.top = `${evt.clientY - this.distY}px`;
         this.props.changeOffset(
           this.element.style.top,
